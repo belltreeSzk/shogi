@@ -25,12 +25,23 @@
         
         <script>
             'use strict';
-            
-            for (let i = 0; i < 81; i++) {
+
+            var hohei   = "歩"; // 19～27,55～63
+            var kyousya = "香"; // 1,9,73,81
+            var keima   = "桂"; // 2,8,74,80
+            var gin     = "銀"; // 3,7,75,79
+            var kin     = "金"; // 4,6,76,78
+            var oh      = "王"; // 5,77
+            var hisya   = "飛"; // 11,71
+            var kaku    = "角"; // 17,65
+
+            for (let i = 1; i < 82; i++) {
+                // iは1から81まで
                 const div = document.createElement('div');
                 div.classList.add('box');
     
                 document.getElementById('wholeWrapper').appendChild(div);
+
             }
 
         </script>
