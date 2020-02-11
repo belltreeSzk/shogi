@@ -10,6 +10,8 @@
                 border-style: solid; 
                 border-color: black;
                 cursor: pointer;
+                text-align: center;
+                line-height: 50px;
             }
             #wholeWrapper {
                 display: grid;
@@ -39,6 +41,26 @@
                 // iは1から81まで
                 const div = document.createElement('div');
                 div.classList.add('box');
+                div.setAttribute("id",i);
+
+                // 駒を配置
+                if ((19 <= i && i <= 27) || (55 <= i && i <= 63) ) {
+                    div.textContent = hohei;
+                } else if ( i == 1 || i == 9 || i == 73 || i == 81) {
+                    div.textContent = kyousya;
+                } else if (i == 2 || i == 8 || i == 74 || i == 80) {
+                    div.textContent = keima;
+                } else if (i == 3 || i == 7 || i == 75 || i == 79) {
+                    div.textContent = gin;
+                } else if (i == 4 || i == 6 || i == 76 || i == 78) {
+                    div.textContent = kin;
+                } else if (i == 5 || i == 77) {
+                    div.textContent = oh;
+                } else if (i == 11 || i == 71) {
+                    div.textContent = hisya;
+                } else if (i == 17 || i == 65) {
+                    div.textContent = kaku;
+                }
     
                 document.getElementById('wholeWrapper').appendChild(div);
 
