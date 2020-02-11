@@ -23,6 +23,9 @@
                 display: grid;
                 grid-template-columns: repeat(9, 50px);
             }
+            .onCatch {
+                background-color: red;
+            }
 
         </style>
     </head>
@@ -96,6 +99,10 @@
                 }
     
                 document.getElementById('wholeWrapper').appendChild(banmendiv);
+
+                komadiv.addEventListener('click', () => {
+                    komadiv.classList.toggle('onCatch');
+                });
 
             }
 
