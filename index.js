@@ -9,17 +9,18 @@ var oh      = "王"; // 5,77
 var hisya   = "飛"; // 11,71
 var kaku    = "角"; // 17,65
 
+var text = null;
+var selectedPosition = null;
+var transferPosition = null;
+
 for (let i = 1; i < 82; i++) {
     // iは1から81まで
     const banmendiv = document.createElement('div');
     const komadiv   = document.createElement('div');
-    banmendiv.classList.add('box');
-    banmendiv.setAttribute("id",i);
-    banmendiv.appendChild(komadiv);
-
+    
     // 駒を配置
-    // 後手
     if (19 <= i && i <= 27) {
+    // 後手
         komadiv.textContent = hohei;
         komadiv.classList.add('secondSide');
     } else if ( i == 1 || i == 9) {
@@ -44,6 +45,7 @@ for (let i = 1; i < 82; i++) {
         komadiv.textContent = kaku;
         komadiv.classList.add('secondSide');
     } else if (55 <= i && i <= 63) {
+    // 先手
         komadiv.textContent = hohei;
     } else if (i == 73 || i == 81) {
         komadiv.textContent = kyousya;
@@ -61,10 +63,56 @@ for (let i = 1; i < 82; i++) {
         komadiv.textContent = kaku;
     }
 
+    banmendiv.classList.add('box');
+    banmendiv.setAttribute("id",i);
+    banmendiv.appendChild(komadiv);
+
     document.getElementById('wholeWrapper').appendChild(banmendiv);
 
-    komadiv.addEventListener('click', () => {
-        komadiv.classList.toggle('onCatch');
+    // 
+    banmendiv.addEventListener('click', () => {
+
+        console.log("1" + this.text);
+        console.log("2" + this.selectedPosition);
+        console.log("3" + this.transferPosition);
+
+        if (this.selectedPosition !== null) {
+            this.transferPosition = banmendiv.getAttribute("id");
+            console.log("4" + this.text);
+            console.log("5" + this.selectedPosition);
+            console.log("6" + this.transferPosition);
+        }
+
+        if (this.selectedPosition == null) {
+            this.selectedPosition = banmendiv.getAttribute("id");
+            this.text = banmendiv.firstElementChild.textContent;
+            console.log("7" + this.text);
+            console.log("8" + this.selectedPosition);
+            console.log("9" + this.transferPosition);
+        }
+
+        if (this.transferPosition !== null) {
+
+            document.getElementById(this.transferPosition).removeChild(document.getElementById(this.transferPosition).firstElementChild);
+
+            const adddiv = document.createElement('div');
+            adddiv.textContent = this.text;
+            banmendiv.appendChild(adddiv);
+
+            document.getElementById(this.selectedPosition).removeChild(document.getElementById(this.selectedPosition).firstElementChild);
+
+            console.log("10" + this.text);
+            console.log("11" + this.selectedPosition);
+            console.log("12" + this.transferPosition);
+
+            this.text = null;
+            this.selectedPosition = null;
+            this.transferPosition = null;
+
+            
+
+        }
     });
+
 
 }
