@@ -86,9 +86,11 @@ for (let i = 1; i < 82; i++) {
             if (banmendiv.firstElementChild.className === "firstSide") {
                 // 先手番の駒をクリックしたら
                 this.selectedClass = 0;
+                banmendiv.classList.toggle('onCatch');
             } else if (banmendiv.firstElementChild.className === "secondSide") {
                 // 後手番の駒をクリックしたら
                 this.selectedClass = 1;
+                banmendiv.classList.toggle('onCatch');
             } else {
                 // 空白の盤面をクリックしtら
                 return;
@@ -135,6 +137,7 @@ for (let i = 1; i < 82; i++) {
 
             // 移動元のdivを削除
             document.getElementById(this.selectedPosition).removeChild(document.getElementById(this.selectedPosition).firstElementChild);
+            document.getElementById(this.selectedPosition).classList.toggle('onCatch');
 
             // クラス変数の初期化
             this.selectedClass = null;
