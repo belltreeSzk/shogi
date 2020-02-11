@@ -8,7 +8,7 @@
     line-height: 50px;
 }
 .firstSide {
-    transform: rotate(180deg);
+    transform: rotate(0deg);
 }
 .secondSide {
     transform: rotate(180deg);

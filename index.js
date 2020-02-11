@@ -12,6 +12,7 @@ var kaku    = "角"; // 17,65
 var text = null;
 var selectedPosition = null;
 var transferPosition = null;
+var selectedClass = null; // 0 or 1, 0 is firstSide and 1 is secondSide
 
 for (let i = 1; i < 82; i++) {
     // iは1から81まで
@@ -47,20 +48,28 @@ for (let i = 1; i < 82; i++) {
     } else if (55 <= i && i <= 63) {
     // 先手
         komadiv.textContent = hohei;
+        komadiv.classList.add('firstSide');
     } else if (i == 73 || i == 81) {
         komadiv.textContent = kyousya;
+        komadiv.classList.add('firstSide');
     } else if (i == 74 || i == 80) {
         komadiv.textContent = keima;
+        komadiv.classList.add('firstSide');
     } else if (i == 75 || i == 79) {
         komadiv.textContent = gin;
+        komadiv.classList.add('firstSide');
     } else if (i == 76 || i == 78) {
         komadiv.textContent = kin;
+        komadiv.classList.add('firstSide');
     } else if (i == 77) {
         komadiv.textContent = oh;
+        komadiv.classList.add('firstSide');
     } else if (i == 71) {
         komadiv.textContent = hisya;
+        komadiv.classList.add('firstSide');
     } else if (i == 65) {
         komadiv.textContent = kaku;
+        komadiv.classList.add('firstSide');
     }
 
     banmendiv.classList.add('box');
@@ -69,42 +78,66 @@ for (let i = 1; i < 82; i++) {
 
     document.getElementById('wholeWrapper').appendChild(banmendiv);
 
-    // 
     banmendiv.addEventListener('click', () => {
 
-        console.log("1" + this.text);
-        console.log("2" + this.selectedPosition);
-        console.log("3" + this.transferPosition);
-
+        // 移動元の駒が選択されていないとき
+        if (this.selectedClass === null) {
+            // 盤面の子要素のクラスで操作を判定
+            if (banmendiv.firstElementChild.className === "firstSide") {
+                // 先手番の駒をクリックしたら
+                this.selectedClass = 0;
+            } else if (banmendiv.firstElementChild.className === "secondSide") {
+                // 後手番の駒をクリックしたら
+                this.selectedClass = 1;
+            } else {
+                // 空白の盤面をクリックしtら
+                return;
+            }
+        }
+            
+        // 移動元の駒が既に選択されているとき移動先のid取得
         if (this.selectedPosition !== null) {
             this.transferPosition = banmendiv.getAttribute("id");
-            console.log("4" + this.text);
-            console.log("5" + this.selectedPosition);
-            console.log("6" + this.transferPosition);
+            
         }
 
+        // 移動元の駒が選択されていないとき移動元のid取得
         if (this.selectedPosition == null) {
             this.selectedPosition = banmendiv.getAttribute("id");
             this.text = banmendiv.firstElementChild.textContent;
-            console.log("7" + this.text);
-            console.log("8" + this.selectedPosition);
-            console.log("9" + this.transferPosition);
+        }
+
+        // 移動元と移動先が同じ時はエラーが起きないようにする
+        if (this.selectedPosition == this.transferPosition) {
+            this.transferPosition = null;
+            return;
         }
 
         if (this.transferPosition !== null) {
 
-            document.getElementById(this.transferPosition).removeChild(document.getElementById(this.transferPosition).firstElementChild);
-
+            // 移動先にdivがあったら削除
+            const deletediv = document.getElementById(this.transferPosition).firstElementChild;
+            if (deletediv !== null) {
+                document.getElementById(this.transferPosition).removeChild(document.getElementById(this.transferPosition).firstElementChild);
+            }
+            
+            // 移動先に追加するdiv要素を作成
             const adddiv = document.createElement('div');
             adddiv.textContent = this.text;
+
+            if (this.selectedClass == 0) {
+                adddiv.classList.add('firstSide');
+            } else if (this.selectedClass == 1) {
+                adddiv.classList.add('secondSide');
+            }
+            
             banmendiv.appendChild(adddiv);
 
+            // 移動元のdivを削除
             document.getElementById(this.selectedPosition).removeChild(document.getElementById(this.selectedPosition).firstElementChild);
 
-            console.log("10" + this.text);
-            console.log("11" + this.selectedPosition);
-            console.log("12" + this.transferPosition);
-
+            // クラス変数の初期化
+            this.selectedClass = null;
             this.text = null;
             this.selectedPosition = null;
             this.transferPosition = null;
