@@ -13,6 +13,7 @@ var text = null;
 var selectedPosition = null;
 var transferPosition = null;
 var selectedClass = null; // 0 or 1, 0 is firstSide and 1 is secondSide
+var whichturn = 0;
 
 for (let i = 1; i < 82; i++) {
     // iは1から81まで
@@ -76,9 +77,14 @@ for (let i = 1; i < 82; i++) {
     banmendiv.setAttribute("id",i);
     banmendiv.appendChild(komadiv);
 
-    document.getElementById('wholeWrapper').appendChild(banmendiv);
+    document.getElementById('center').appendChild(banmendiv);
 
     banmendiv.addEventListener('click', () => {
+
+        // 逆手番の駒は選択できない
+        if ((this.whichturn == 0 && banmendiv.firstElementChild.className === "secondSide") || (this.whichturn == 1 && banmendiv.firstElementChild.className === "firstSide") ) {
+            return;
+        }
 
         // 移動元の駒が選択されていないとき
         if (this.selectedClass === null) {
@@ -144,6 +150,11 @@ for (let i = 1; i < 82; i++) {
             this.text = null;
             this.selectedPosition = null;
             this.transferPosition = null;
+            if (this.whichturn == 0) {
+                this.whichturn = 1;
+            } else {
+                this.whichturn = 0;
+            }
 
             
 

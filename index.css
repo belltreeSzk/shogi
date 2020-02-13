@@ -15,8 +15,25 @@
 }
 #wholeWrapper {
     display: grid;
+    grid-template-columns: 150px 470px 150px;
+}
+#center {
+    display: grid;
     grid-template-columns: repeat(9, 50px);
 }
 .onCatch {
     background-color: red;
+}
+.left {
+    border-style: solid; 
+    border-color: black;
+    margin-right: 10px;
+    height: 30%;
+}
+.right {
+    border-style: solid; 
+    border-color: black;
+    margin-left: 10px;
+    margin-top: 300px;
+    height: 30%;
 }
