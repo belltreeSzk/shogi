@@ -131,6 +131,19 @@ for (let i = 1; i < 82; i++) {
             if (deletediv !== null) {
                 document.getElementById(this.transferPosition).removeChild(document.getElementById(this.transferPosition).firstElementChild);
             }
+
+            // 持ち駒作成
+            if (deletediv.className === 'secondSide') {
+                const mochigomaadddiv = document.createElement('div');
+                mochigomaadddiv.textContent = deletediv.textContent;
+                mochigomaadddiv.classList.add('mochigomafirstside');
+                document.getElementById('right').appendChild(mochigomaadddiv);
+            } else if (deletediv.className === 'firstSide')  {
+                const mochigomaadddiv = document.createElement('div');
+                mochigomaadddiv.textContent = deletediv.textContent;
+                mochigomaadddiv.classList.add('mochigomasecondside');
+                document.getElementById('left').appendChild(mochigomaadddiv);
+            }
             
             // 移動先に追加するdiv要素を作成
             const adddiv = document.createElement('div');
