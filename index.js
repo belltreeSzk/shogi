@@ -82,9 +82,12 @@ for (let i = 1; i < 82; i++) {
     banmendiv.addEventListener('click', () => {
 
         // 逆手番の駒は選択できない
-        if ((this.whichturn == 0 && banmendiv.firstElementChild.className === "secondSide") || (this.whichturn == 1 && banmendiv.firstElementChild.className === "firstSide") ) {
-            return;
+        if (this.selectedClass === null) {
+            if ((this.whichturn == 0 && banmendiv.firstElementChild.className === "secondSide") || (this.whichturn == 1 && banmendiv.firstElementChild.className === "firstSide") ) {
+                return;
+            }
         }
+            
 
         // 移動元の駒が選択されていないとき
         if (this.selectedClass === null) {
@@ -150,6 +153,8 @@ for (let i = 1; i < 82; i++) {
             this.text = null;
             this.selectedPosition = null;
             this.transferPosition = null;
+
+            // 手番の変更
             if (this.whichturn == 0) {
                 this.whichturn = 1;
             } else {
